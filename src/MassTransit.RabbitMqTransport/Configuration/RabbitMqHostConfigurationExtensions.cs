@@ -25,6 +25,16 @@ namespace MassTransit
         /// </summary>
         /// <param name="configurator"></param>
         /// <param name="hostAddress">The URI host address of the RabbitMQ host (rabbitmq://host:port/vhost)</param>
+        public static IRabbitMqHost Host(this IRabbitMqBusFactoryConfigurator configurator, Uri hostAddress)
+        {
+            return configurator.Host(new RabbitMqHostConfigurator(hostAddress).Settings);
+        }
+
+        /// <summary>
+        ///     Configure a RabbitMQ host using the configuration API
+        /// </summary>
+        /// <param name="configurator"></param>
+        /// <param name="hostAddress">The URI host address of the RabbitMQ host (rabbitmq://host:port/vhost)</param>
         /// <param name="configure"></param>
         public static IRabbitMqHost Host(this IRabbitMqBusFactoryConfigurator configurator, Uri hostAddress,
             Action<IRabbitMqHostConfigurator> configure)
